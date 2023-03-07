@@ -1,0 +1,19 @@
+table{
+    table-layout: fixed;
+    width: 100%;
+    display: compact;
+    overflow: auto;
+    border-collapse: collapse;
+    text-align: center;
+    word-wrap: break-word;
+}
+td, th{
+    margin: 2px auto;
+    padding: 2px;
+    border: 1px solid black;
+}
+
+.tr_top{
+    background-color: lightgray;
+    font-weight: bolder;
+}
