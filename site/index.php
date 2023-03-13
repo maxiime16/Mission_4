@@ -15,20 +15,18 @@ $resultats = $afficher_vehicule->fetchAll();
         <th>Désignation</th>
         <th>Nature</th>
         <th></th>
-        <th></th>
     </tr>
     <?php foreach ($resultats as $resultat){ ?>
     <tr>
         <td><?php echo $resultat['v_num_interne']?></td>
         <td><?php echo $resultat['v_marque']." ".$resultat['v_modele']?></td>
         <td><?php echo $resultat['v_nature'];?></td>
-        <td>
+        <td style="border=10px;">
             <form action='carnet_sante.php' method='post'>
-                <input type='submit' value='Carnet de santé'>
-                <input name='id_num_interne' type='hidden' value="<?php echo htmlspecialchars($resultat['v_num_interne']); ?>">
+                <input type='submit' value='Voir carnet de santé'>
+                <input name='id_num_interne' type='hidden' value="<?php echo $_SESSION['id'] = htmlspecialchars($resultat['v_num_interne']); ?>">
             </form>
         </td>
-        <td><button>Mettre à jour</button></td>
     </tr>
     <?php }; ?>
 </table>

@@ -52,3 +52,11 @@ BEGIN
         END CASE;
 END //
 DELIMITER ;
+
+
+    DELIMITER //
+CREATE PROCEDURE AjoutFourniture( IN date DATE, IN designation VARCHAR(50), IN code VARCHAR(50),IN quantite INT(10),IN prix FLOAT(10),IN type VARCHAR(50),IN num_bon VARCHAR(50), IN id VARCHAR(50))
+BEGIN
+INSERT INTO fourniture (f_id, f_date, f_designation, f_code, f_quantite, f_prix, f_type, f_num_bon, f_id_vehicule) VALUES (NULL, date, designation, code, quantite, prix, type, num_bon , id);
+END //
+DELIMITER ;

@@ -1,7 +1,7 @@
 <?php
 include_once "header.php";
 
-$id = htmlspecialchars($_POST['id_num_interne']); // on récupère l'id pour afficher le bon carnet de santé
+$_SESSION["id"] = htmlspecialchars($_POST['id_num_interne']); // on récupère l'id pour afficher le bon carnet de santé
 ?>
 
 <!-- Bouton qui permet de retourner à l'accueil -->
@@ -14,7 +14,7 @@ $id = htmlspecialchars($_POST['id_num_interne']); // on récupère l'id pour aff
 <div style="border: 2px solid black">
     <?php // On fait appel à la procédure et on l'exécute
     $afficher = $db->prepare("CALL afficher(?,?)");
-    $afficher->execute(array('vehicule', $id));
+    $afficher->execute(array('vehicule', $_SESSION["id"]));
     // On affiche tous les résultats
     $resultats = $afficher->fetchAll();
     foreach ($resultats as $resultat) { ?>
@@ -30,6 +30,10 @@ $id = htmlspecialchars($_POST['id_num_interne']); // on récupère l'id pour aff
 <!-- partie qui permet d'afficher les fournitures -->
 <div>
     <h2>Fournitures:</h2>
+    <form action='Ajout_fourniture.php' method='post'>
+        <input type='submit' value='Ajouter fourniture'>
+        <input name='id_num_interne' type='hidden' value="<?php echo htmlspecialchars($resultat['v_num_interne']); ?>">
+    </form>
     <table>
         <tr class="tr_top">
             <th>Date</th>
@@ -41,7 +45,7 @@ $id = htmlspecialchars($_POST['id_num_interne']); // on récupère l'id pour aff
         </tr>
         <?php // On fait appel à la procédure et on l'exécute
         $afficher = $db->prepare("CALL afficher(?,?)");
-        $afficher->execute(array('fourniture', $id));
+        $afficher->execute(array('fourniture', $_SESSION["id"]));
         // On affiche tous les résultats dans un tableau
         $resultats = $afficher->fetchAll();
         foreach ($resultats as $resultat) { ?>
@@ -60,7 +64,7 @@ $id = htmlspecialchars($_POST['id_num_interne']); // on récupère l'id pour aff
     <?php
     // On fait appel à la procédure et on l'exécute
     $prix_total = $db->prepare('CALL SommePrix(?,?)');
-    $prix_total->execute(array('fourniture', $id));
+    $prix_total->execute(array('fourniture', $_SESSION["id"]));
     // On affiche le résultat
     $resultat = $prix_total->fetch();
     ?>
@@ -79,7 +83,7 @@ $id = htmlspecialchars($_POST['id_num_interne']); // on récupère l'id pour aff
             <th>N° OR</th>
         </tr>
         <?php $afficher = $db->prepare("CALL afficher(?,?)");
-        $afficher->execute(array('main doeuvre', $id));
+        $afficher->execute(array('main doeuvre', $_SESSION["id"]));
         $resultats = $afficher->fetchAll();
         foreach ($resultats as $resultat) { ?>
             <tr class="tr_carnet_data">
@@ -95,7 +99,7 @@ $id = htmlspecialchars($_POST['id_num_interne']); // on récupère l'id pour aff
     <?php
     // On fait appel à la procédure et on l'exécute
     $prix_total = $db->prepare('CALL SommePrix(?,?)');
-    $prix_total->execute(array('main doeuvre', $id));
+    $prix_total->execute(array('main doeuvre', $_SESSION["id"]));
     // On affiche le résultat
     $resultat = $prix_total->fetch();
     ?>
@@ -118,7 +122,7 @@ $id = htmlspecialchars($_POST['id_num_interne']); // on récupère l'id pour aff
         </tr>
         <?php // On fait appel à la procédure et on l'exécute
         $afficher = $db->prepare("CALL afficher(?,?)");
-        $afficher->execute(array('prestation', $id));
+        $afficher->execute(array('prestation', $_SESSION["id"]));
         // On affiche tous les résultats dans un tableau
         $resultats = $afficher->fetchAll();
         foreach ($resultats as $resultat) { ?>
@@ -137,7 +141,7 @@ $id = htmlspecialchars($_POST['id_num_interne']); // on récupère l'id pour aff
     <?php
     // On fait appel à la procédure et on l'exécute
     $prix_total = $db->prepare('CALL SommePrix(?,?)');
-    $prix_total->execute(array('prestation', $id));
+    $prix_total->execute(array('prestation', $_SESSION["id"]));
     // On affiche le résultat
     $resultat = $prix_total->fetch(); ?>
     <div> Total fournitures: <?php echo number_format($resultat['total_prix'], 2); ?> €</div>
@@ -160,7 +164,7 @@ $id = htmlspecialchars($_POST['id_num_interne']); // on récupère l'id pour aff
             <th>Date prochain contrôle</th>
         </tr>
         <?php $afficher = $db->prepare("CALL afficher(?,?)");
-        $afficher->execute(array('controle', $id));
+        $afficher->execute(array('controle', $_SESSION["id"]));
         $resultats = $afficher->fetchAll();
         foreach ($resultats as $resultat) { ?>
             <tr class="tr_carnet_data">
@@ -179,7 +183,7 @@ $id = htmlspecialchars($_POST['id_num_interne']); // on récupère l'id pour aff
     <?php
     // On fait appel à la procédure et on l'exécute
     $prix_total = $db->prepare('CALL SommePrix(?,?)');
-    $prix_total->execute(array('controle', $id));
+    $prix_total->execute(array('controle', $_SESSION["id"]));
     // On affiche le résultat
     $resultat = $prix_total->fetch(); ?>
     <div> Total fournitures: <?php echo number_format($resultat['total_prix'], 2); ?> €</div>

@@ -1,5 +1,8 @@
 <?php
 include_once ('connexion.php');
+
+// on démarre une session pour récupérer l'id du véhicule
+session_start();
 ?>
 <!doctype html>
 <html lang="fr">

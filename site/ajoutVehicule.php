@@ -1,9 +1,8 @@
 <?php
 include_once ('header.php');
-include_once ('connexion.php');
-
 if (isset($_POST['valider'])) {
     // on fait appel a une procedure stockée qui permet d'ajouter un vehicule s'il n'existe pas
+    /*
     $ajout_vehicule = $db->prepare("CALL ajoutvehicule(?, ?, ?, ?, ?, ?, ?)");
     $ajout_vehicule->execute(array($_POST['num_interne'],
         $_POST['marque'],
@@ -12,8 +11,9 @@ if (isset($_POST['valider'])) {
         $_POST['code_parc'],
         $_POST['carburant'],
         $_POST['compteur'] ));
-}
-?>
+*/
+    echo "bonjour ".$_POST['num_interne'];
+}else echo "non"; ?>
 <a href="index.php">Retourner a l'accueil</a>
 <h1>Ajouter véhicule</h1>
 <form action="" method="post">
