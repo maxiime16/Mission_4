@@ -30,7 +30,7 @@ $_SESSION["id"] = htmlspecialchars($_POST['id_num_interne']); // on récupère l
 <!-- partie qui permet d'afficher les fournitures -->
 <div>
     <h2>Fournitures:</h2>
-    <form action='Ajout_fourniture.php' method='post'>
+    <form action='ajout_fourniture.php' method='post'>
         <input type='submit' value='Ajouter fourniture'>
         <input name='id_num_interne' type='hidden' value="<?php echo htmlspecialchars($resultat['v_num_interne']); ?>">
     </form>

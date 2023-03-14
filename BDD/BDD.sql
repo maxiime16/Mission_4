@@ -18,6 +18,7 @@ CREATE TABLE fourniture(
     f_prix FLOAT(10),
     f_type VARCHAR(50),
     f_num_bon VARCHAR(50),
+    f_id_vehicule VARCHAR(50),
     PRIMARY KEY (f_id)
 )ENGINE=INNODB DEFAULT CHARSET=UTF8;
 
@@ -28,6 +29,7 @@ CREATE TABLE main_doeuvre(
     mo_temps VARCHAR(20),
     mo_num_ordre_rep VARCHAR(50),
     mo_prix FLOAT(10),
+    mo_id_vehicule VARCHAR(50),
     PRIMARY KEY (mo_id)
 )ENGINE=INNODB DEFAULT CHARSET=UTF8;
 
@@ -41,16 +43,9 @@ CREATE TABLE prestation(
     p_nature_travaux VARCHAR(50),
     p_num_bon VARCHAR(50),
     p_prix FLOAT(10),
+    p_id_vehicule VARCHAR(50),
     PRIMARY KEY (p_id)
 )ENGINE=INNODB DEFAULT CHARSET=UTF8;
-
-ALTER TABLE fourniture ADD `f_id_vehicule` VARCHAR(50);
-ALTER TABLE prestation ADD `p_id_vehicule` VARCHAR(50);
-ALTER TABLE main_doeuvre ADD `mo_id_vehicule` VARCHAR(50);
-
-ALTER TABLE fourniture ADD FOREIGN KEY (f_id_vehicule) REFERENCES vehicule(v_num_interne);
-ALTER TABLE prestation ADD FOREIGN KEY (p_id_vehicule) REFERENCES vehicule(v_num_interne);
-ALTER TABLE main_doeuvre ADD FOREIGN KEY (mo_id_vehicule) REFERENCES vehicule(v_num_interne);
 
 CREATE TABLE controle(
     c_id INT NOT NULL AUTO_INCREMENT,
@@ -68,4 +63,17 @@ CREATE TABLE controle(
     PRIMARY KEY (c_id)
 )ENGINE=INNODB DEFAULT CHARSET=UTF8;
 
+CREATE TABLE users(
+    u_id INT NOT NULL AUTO_INCREMENT,
+    u_identifiant VARCHAR (50),
+    u_password VARCHAR (255),
+    PRIMARY KEY (u_id)
+)ENGINE=INNODB DEFAULT CHARSET=UTF8;
+
+ALTER TABLE fourniture ADD FOREIGN KEY (f_id_vehicule) REFERENCES vehicule(v_num_interne);
+ALTER TABLE prestation ADD FOREIGN KEY (p_id_vehicule) REFERENCES vehicule(v_num_interne);
+ALTER TABLE main_doeuvre ADD FOREIGN KEY (mo_id_vehicule) REFERENCES vehicule(v_num_interne);
 ALTER TABLE controle ADD FOREIGN KEY (c_id_vehicule) REFERENCES vehicule(v_num_interne);
+
+
+INSERT INTO users

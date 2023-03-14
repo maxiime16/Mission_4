@@ -28,6 +28,8 @@ BEGIN
             SELECT * FROM main_doeuvre WHERE mo_id_vehicule =id_vehicule;
         WHEN 'controle' THEN
             SELECT * FROM controle WHERE c_id_vehicule =id_vehicule;
+        WHEN 'controle' THEN
+            SELECT * FROM users;
         ELSE
             SELECT 'Invalid choice' AS message;
     END CASE;

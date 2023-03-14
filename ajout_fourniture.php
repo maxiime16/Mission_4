@@ -47,7 +47,7 @@ if (isset($_POST['valider'])) {
     <h2>Fourniture à ajouter</h2>
     <form action="" method="post">
         <label for="date">Date</label>
-        <input type="date" name="date" id="date" value="<?php echo date("Y-m-d") ?>"required><br>
+        <input type="date" name="date" id="date" value="<?php echo date("Y-m-d") ?>" required><br>
 
         <label for="designation">Désignation</label>
         <input type="text" name="designation" id="designation" required><br>
@@ -67,6 +67,6 @@ if (isset($_POST['valider'])) {
         <label for="numBon">Numero bon</label>
         <input type="text" name="numBon" id="numBon" required><br>
 
-        <input type="submit" value="Ajouter" name="valider" id="valider" >
+        <input type="submit" value="Ajouter" name="valider" id="valider">
     </form>
 </div>

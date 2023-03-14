@@ -10,5 +10,7 @@ le type, les données constructrices concernant les vidanges et révisions, les 
 le kilométrage, les dates de dernière vidange et révisions, les kilométrages ou temps restant avant vidange ou révisions,
 la liste des réparations effectuées...
 
+INSTALLATION :
+Aucune installation particulière, l'utilisateur doit posséder un naviageteur web ainsi d'une connexion internet pour y accéder.
 
 UTILISATION:
