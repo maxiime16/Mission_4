@@ -21,9 +21,7 @@ if (isset($_POST['valider'])) {
 };
 ?>
 <!-- Bouton qui permet de retourner à l'accueil -->
-<a href="index.php">
-    <button>Accueil</button>
-</a>
+<a href="carnet_sante.php"> <button>Retour</button></a>
 
 
 <h1>Ajout fourniture:</h1>

@@ -1,12 +1,13 @@
 <?php
 include_once "header.php";
-
-$_SESSION["id"] = htmlspecialchars($_POST['id_num_interne']); // on récupère l'id pour afficher le bon carnet de santé
+if (!isset($_SESSION["id"])){
+    $_SESSION["id"] = htmlspecialchars($_POST['id_num_interne']); // on récupère l'id pour afficher le bon carnet de santé
+}
 ?>
 
 <!-- Bouton qui permet de retourner à l'accueil -->
-<a href="index.php">
-    <button>Accueil</button>
+<a href="gestion_vehicule.php">
+    <button>Retour liste véhicule</button>
 </a>
 <h1>Carnet de santé du véhicule</h1>
 

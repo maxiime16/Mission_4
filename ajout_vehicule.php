@@ -1,3 +1,8 @@
+<!-- Bouton pour retourner à l'accueil -->
+<div>
+    <a href="index.php"><button>Accueil</button></a>
+</div>
+
 <?php
 include_once('header.php');
 if (isset($_POST['valider'])) {
@@ -11,10 +16,7 @@ if (isset($_POST['valider'])) {
         $_POST['carburant'],
         $_POST['compteur']));
 } ?>
-<!-- Bouton pour retourner à l'accueil -->
-<div>
-    <a href="index.php"><button>Accueil</button></a>
-</div>
+
 <h1>Ajouter véhicule</h1>
 <form action="" method="post">
     <!--Formulaire d'ajout de véhicule-->
