@@ -24,16 +24,36 @@ if (!isset($_SESSION["id"])){
         <div>Nature véhicule:<?php echo $resultat['v_nature'] ?></div>
         <div>Code parc:<?php echo $resultat['v_code_parc'] ?></div>
         <div>Carburant:<?php echo $resultat['v_carburant'] ?></div>
-        <div>Compteur dernière prise carb:<?php echo $resultat['v_compteur'] ?></div>
     <?php }; ?>
 </div>
+<br>
+
+<!-- zone temps -->
+<div>
+    <div>
+        <?php
+        $afficher = $db->prepare("SELECT MAX(c_date_prochain) FROM controle WHERE c_designation LIKE '%vidange%' AND c_id_vehicule = ?;");
+        $afficher->execute(array($_SESSION["id"]));
+        $row = $afficher->fetch(PDO::FETCH_ASSOC);
+        echo "Prochaine vidange: ".$row['MAX(c_date_prochain)'] . "<br>";
+        ?>
+    </div>
+    <div>
+        <?php
+        $afficher = $db->prepare("SELECT MAX(c_date_prochain) FROM controle WHERE c_designation LIKE '%révision%' AND c_id_vehicule = ?;");
+        $afficher->execute(array($_SESSION["id"]));
+        $row = $afficher->fetch(PDO::FETCH_ASSOC);
+        echo "Prochaine révision: ".$row['MAX(c_date_prochain)'] . "<br>";
+        ?>
+    </div>
+</div>
+
 
 <!-- partie qui permet d'afficher les fournitures -->
 <div>
     <h2>Fournitures:</h2>
     <form action='ajout_fourniture.php' method='post'>
         <input type='submit' value='Ajouter fourniture'>
-        <input name='id_num_interne' type='hidden' value="<?php echo htmlspecialchars($resultat['v_num_interne']); ?>">
     </form>
     <table>
         <tr class="tr_top">
@@ -69,13 +89,16 @@ if (!isset($_SESSION["id"])){
     // On affiche le résultat
     $resultat = $prix_total->fetch();
     ?>
-    <div> Total fournitures: <?php echo number_format($resultat['total_prix'], 2); ?> €</div>
+    <div> Total fournitures: <?php echo $prix1 = number_format($resultat['total_prix'], 2); ?> €</div>
     <?php $prix_total->closeCursor(); // On ferme la requête pour éviter les conflits avec les autres requêtes / affichage ?>
 </div>
 
 <!-- partie qui permet d'afficher les mains d'œuvre -->
 <div>
     <h2>Main d'œuvre:</h2>
+    <form action='ajout_MainDoeuvre.php' method='post'>
+        <input type='submit' value='Ajouter MO'>
+    </form>
     <table>
         <tr class="tr_top">
             <th>Date M.O.</th>
@@ -104,13 +127,16 @@ if (!isset($_SESSION["id"])){
     // On affiche le résultat
     $resultat = $prix_total->fetch();
     ?>
-    <div> Total fournitures: <?php echo number_format($resultat['total_prix'], 2); ?> €</div>
+    <div> Total fournitures: <?php echo $prix2 = number_format($resultat['total_prix'], 2); ?> €</div>
     <?php $prix_total->closeCursor(); // On ferme la requête pour éviter les conflits avec les autres requêtes / affichage ?>
 </div>
 
 <!-- partie qui permet d'afficher les prestations  -->
 <div>
     <h2>Bon de prestation extérieure:</h2>
+    <form action='ajout_prestation.php' method='post'>
+        <input type='submit' value='Ajouter prestation'>
+    </form>
     <table>
         <tr class="tr_top">
             <th>Date de début</th>
@@ -145,7 +171,7 @@ if (!isset($_SESSION["id"])){
     $prix_total->execute(array('prestation', $_SESSION["id"]));
     // On affiche le résultat
     $resultat = $prix_total->fetch(); ?>
-    <div> Total fournitures: <?php echo number_format($resultat['total_prix'], 2); ?> €</div>
+    <div> Total fournitures: <?php echo $prix3 = number_format($resultat['total_prix'], 2); ?> €</div>
     <?php $prix_total->closeCursor(); // On ferme la requête pour éviter les conflits avec les autres requêtes / affichage ?>
 </div>
 
@@ -174,6 +200,7 @@ if (!isset($_SESSION["id"])){
                 <td><?php echo $resultat['c_num_or'] ?></td>
                 <td><?php echo $resultat['c_cpt'] ?></td>
                 <td><?php echo $resultat['c_cpt_dernier'] ?></td>
+                <td><?php echo $resultat['c_observation'] ?></td>
                 <td><?php echo $resultat['c_seuil'] ?></td>
                 <td><?php echo $resultat['c_date_dernier'] ?></td>
                 <td><?php echo $resultat['c_date_prochain'] ?></td>
@@ -181,13 +208,15 @@ if (!isset($_SESSION["id"])){
         <?php };
         $afficher->closeCursor(); // On ferme la requête pour éviter les conflits avec les autres requêtes / affichage ?>
     </table>
+</div>
+<br>
+<div>
     <?php
     // On fait appel à la procédure et on l'exécute
     $prix_total = $db->prepare('CALL SommePrix(?,?)');
     $prix_total->execute(array('controle', $_SESSION["id"]));
     // On affiche le résultat
     $resultat = $prix_total->fetch(); ?>
-    <div> Total fournitures: <?php echo number_format($resultat['total_prix'], 2); ?> €</div>
+    <div> Total véhicule: <?php echo $total = number_format($prix1+$prix2+$prix3, 2); ?> €</div>
     <?php $prix_total->closeCursor(); // On ferme la requête pour éviter les conflits avec les autres requêtes / affichage ?>
-
 </div>

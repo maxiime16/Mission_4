@@ -24,6 +24,7 @@ if (!isset($_SESSION['connected'])) {
         echo "<div>$message_erreur</div>";
     } ?>
     <!-- Le formulaire de connection -->
+    <h1>Connexion:</h1>
     <div>
         <form action="" method="post">
             <label for="login">Identifiant</label>

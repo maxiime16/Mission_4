@@ -9,3 +9,4 @@ try {
 catch(Exception $e) {
     die('Erreur : '.$e->getMessage());
 }
+//SELECT equipe.chauffeur, mission.motif, mission.datemission, mission.heurerdv, mission.lieurdv, mission.destination FROM mission INNER JOIN equipe ON equipe.code = mission.codeequipe;

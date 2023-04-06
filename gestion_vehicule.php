@@ -18,6 +18,7 @@ $resultats = $afficher_vehicule->fetchAll();
         <th>Désignation</th>
         <th>Nature</th>
         <th></th>
+        <th></th>
     </tr>
     <?php foreach ($resultats as $resultat) { ?>
         <tr>
@@ -27,6 +28,13 @@ $resultats = $afficher_vehicule->fetchAll();
             <td style="border=10px;">
                 <form action='carnet_sante.php' method='post'>
                     <input type='submit' value='Voir carnet de santé'>
+                    <input name='id_num_interne' type='hidden'
+                           value="<?php echo htmlspecialchars($resultat['v_num_interne']); ?>">
+                </form>
+            </td>
+            <td style="border=10px;">
+                <form action='ordre_reparation.php' method='post'>
+                    <input type='submit' value='Voir ordre de réparation'>
                     <input name='id_num_interne' type='hidden'
                            value="<?php echo htmlspecialchars($resultat['v_num_interne']); ?>">
                 </form>

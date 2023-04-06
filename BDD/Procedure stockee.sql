@@ -62,3 +62,26 @@ BEGIN
 INSERT INTO fourniture (f_id, f_date, f_designation, f_code, f_quantite, f_prix, f_type, f_num_bon, f_id_vehicule) VALUES (NULL, date, designation, code, quantite, prix, type, num_bon , id);
 END //
 DELIMITER ;
+
+    DELIMITER //
+CREATE PROCEDURE AjoutMainDoeuvre(IN date DATE, IN libelle VARCHAR(50),IN temps VARCHAR(20),IN num_ordre_rep VARCHAR(50),IN prix FLOAT(10),IN id_vehicule VARCHAR(50))
+BEGIN
+INSERT INTO `main_doeuvre` (`mo_id`, `mo_date`, `mo_libelle`, `mo_temps`, `mo_num_ordre_rep`, `mo_prix`, `mo_id_vehicule`) VALUES (NULL, date, libelle, temps, num_ordre_rep, prix , id_vehicule);
+END //
+DELIMITER ;
+
+    DELIMITER //
+CREATE PROCEDURE AjoutPrestation(IN date_debut DATE, IN date_fin DATE, IN num_marche INT(10), IN etat VARCHAR(50), IN fournisseur VARCHAR(50), IN nature_travaux VARCHAR(50), IN num_bon VARCHAR(50), IN prix FLOAT(10), IN id_vehicule VARCHAR(50))
+BEGIN
+INSERT INTO `prestation` (`p_id`, `p_date_debut`, `p_date_fin`, `p_num_marche`, `p_etat`, `p_fournisseur`, `p_nature_travaux`, `p_num_bon`, `p_prix`, `p_id_vehicule`) VALUES (NULL, date_debut, date_fin, num_marche, etat, fournisseur, nature_travaux, num_bon, prix, id_vehicule);
+END //
+DELIMITER ;
+
+INSERT INTO `controle` (`c_id`, `c_designation`, `c_date`, `c_num_or`, `c_cpt`, `c_cpt_dernier`, `c_observation`, `c_seuil`, `c_date_dernier`, `c_date_prochain`, `c_id_vehicule`, `c_prix`) VALUES (NULL, 'vidange', '2023-04-19', 'OR18281982', '10291', '91919', 'aucune', '1020', '2023-04-04', '2025-04-04', '0017 CL', '7');
+
+DELIMITER //
+CREATE PROCEDURE AjoutControle(IN designation VARCHAR(50), IN date DATE, IN num_or VARCHAR(50), IN cpt INT, IN cpt_dernier INT, IN observation VARCHAR(50), IN seuil INT, IN date_dernier DATE, IN date_prochain DATE, IN id_vehicule VARCHAR(50), IN prix FLOAT(10))
+BEGIN
+INSERT INTO `controle` (`c_id`, `c_designation`, `c_date`, `c_num_or`, `c_cpt`, `c_cpt_dernier`, `c_observation`, `c_seuil`, `c_date_dernier`, `c_date_prochain`, `c_id_vehicule`, `c_prix`) VALUES (NULL, designation, date, num_or, cpt, cpt_dernier, observation, seuil, date_dernier, date_prochain, id_vehicule, prix);
+END //
+DELIMITER ;
